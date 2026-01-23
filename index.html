@@ -83,13 +83,46 @@ input[type=number] {
 >
 
 
-<button onclick="check()" style="padding:12px 20px; font-size:16px; margin-top:10px; cursor:pointer;">
+<button onclick="check()" 
+  style="
+    padding:14px 22px;
+    font-size:16px;
+    margin-top:14px;
+    border-radius:10px;
+    border:none;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+    width:100%;
+    transition:background 0.2s, transform 0.1s;
+  "
+  onmouseover="this.style.background='#2563eb'"
+  onmouseout="this.style.background='#3b82f6'"
+  onmousedown="this.style.transform='scale(0.98)'"
+  onmouseup="this.style.transform='scale(1)'"
+>
   Check
 </button>
+
   <button onclick="resetAll()" 
-  style="padding:10px 18px; font-size:14px; margin-top:10px; margin-left:10px; cursor:pointer;">
-  Reset
+  style="
+    padding:10px 18px;
+    font-size:14px;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #444;
+    background:#222;
+    color:#ccc;
+    cursor:pointer;
+    width:100%;
+    transition:background 0.2s;
+  "
+  onmouseover="this.style.background='#2a2a2a'"
+  onmouseout="this.style.background='#222'"
+>
+  Zurücksetzen
 </button>
+
 
 
 
@@ -103,5 +136,6 @@ input[type=number] {
 
 </body>
 </html>
+
 
 
