@@ -68,3 +68,15 @@ if (weeklyChange < 0) {
 document.getElementById("result").innerText = text + "\n\n" + weeklyText;
 
 }
+
+
+function resetAll() {
+  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
+
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("d" + i).value = "";
+  }
+
+  localStorage.removeItem("weightsInputs");
+  document.getElementById("result").innerText = "";
+}
