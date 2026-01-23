@@ -30,7 +30,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d1" 
   placeholder="Tag 1 (kg)"
-  oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d1')"
+  oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d1')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -39,7 +39,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d2" 
   placeholder="Tag 2 (kg)"
- oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d2')"
+ oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d2')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -47,7 +47,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d3" 
   placeholder="Tag 3 (kg)"
- oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d3')"
+ oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d3')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -55,7 +55,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d4" 
   placeholder="Tag 4 (kg)"
- oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d4')"
+ oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d4')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -63,7 +63,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d5" 
   placeholder="Tag 5 (kg)"
-  oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d5')"
+  oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d5')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -71,7 +71,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d6" 
   placeholder="Tag 6 (kg)"
-  oninput="saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d6')"
+  oninput="autoComma(this);saveInputs(); if(/^\d{2,3}([.,]\d)$/.test(this.value)) jumpNext('d6')"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -79,7 +79,7 @@ input[type=number] {
   type="number" inputmode="decimal"
   id="d7" 
   placeholder="Tag 7 (kg)"
-  oninput="saveInputs()"
+  oninput="autoComma(this);saveInputs()"
   style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
 >
 
@@ -137,6 +137,7 @@ input[type=number] {
 
 </body>
 </html>
+
 
 
 
