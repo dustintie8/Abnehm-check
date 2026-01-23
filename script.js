@@ -85,4 +85,11 @@ function jumpNext(currentId) {
   const next = document.getElementById("d" + (num + 1));
   if (next) next.focus();
 }
+function autoComma(el) {
+  if (/^\d{2,3}$/.test(el.value)) {
+    el.value = el.value + ",0";
+    saveInputs();
+  }
+}
+
 
