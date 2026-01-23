@@ -80,3 +80,9 @@ function resetAll() {
   localStorage.removeItem("weightsInputs");
   document.getElementById("result").innerText = "";
 }
+function jumpNext(currentId) {
+  const num = parseInt(currentId.replace("d", ""));
+  const next = document.getElementById("d" + (num + 1));
+  if (next) next.focus();
+}
+
