@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+  <meta charset="UTF-8">
+<style>
+/* Chrome, Edge, Safari */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+
+  <title>Abnehm-Check</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; max-width:420px; margin:auto;">
+
+
+<h2>Abnehm-Check</h2>
+<p>Trage dein Gewicht der letzten 7 Tage ein:</p>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d1" 
+  placeholder="Tag 1 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d2" 
+  placeholder="Tag 2 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d3" 
+  placeholder="Tag 3 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d4" 
+  placeholder="Tag 4 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d5" 
+  placeholder="Tag 5 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d6" 
+  placeholder="Tag 6 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+<input 
+  type="number" inputmode="decimal"
+  id="d7" 
+  placeholder="Tag 7 (kg)"
+  oninput="saveInputs()"
+  style="width:100%; padding:10px; margin-bottom:8px; font-size:16px; border-radius:6px; border:1px solid #444; background:#222; color:#eee;"
+>
+
+
+<button onclick="check()" style="padding:12px 20px; font-size:16px; margin-top:10px; cursor:pointer;">
+  Check
+</button>
+
+
+<p id="result" style="margin-top:20px; font-size:18px; font-weight:bold;"></p>
+
+<script src="script.js"></script>
+
+<script>
+  loadInputs();
+</script>
+
+</body>
+</html>
+

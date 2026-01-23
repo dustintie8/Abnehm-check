@@ -1,0 +1,16 @@
+{
+  "name": "Abnehm-Check",
+  "short_name": "Abnehm",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "description": "Einfacher Abnehm-Check mit Gewichtstrend",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
