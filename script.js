@@ -86,10 +86,18 @@ function jumpNext(currentId) {
   if (next) next.focus();
 }
 function autoComma(el) {
+  // Punkt sofort in Komma umwandeln
+  if (el.value.includes(".")) {
+    el.value = el.value.replace(".", ",");
+  }
+
+  // Falls nur 2–3 Ziffern eingegeben wurden → ,0 anhängen
   if (/^\d{2,3}$/.test(el.value)) {
     el.value = el.value + ",0";
-    saveInputs();
   }
+
+  saveInputs();
 }
+
 
 
