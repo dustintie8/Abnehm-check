@@ -70,7 +70,15 @@ document.getElementById("result").innerText = text + "\n\n" + weeklyText;
 }
 
 
-function resetAll() {
+function resetAll() 
+  function startNewWeek() {
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("d" + i).value = "";
+  }
+  saveInputs();
+}
+
+{
   if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
 
   for (let i = 1; i <= 7; i++) {
@@ -98,6 +106,7 @@ function autoComma(el) {
 
   saveInputs();
 }
+
 
 
 
