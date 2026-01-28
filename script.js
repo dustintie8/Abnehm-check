@@ -115,7 +115,8 @@ function renderHistory() {
 ========================= */
 
 function check() {
-  let weights = [];
+  let weights = [];let avgWeek = weights.reduce((sum, w) => sum + w, 0) / weights.length;
+
   let avgWeek = weights.reduce((a, b) => a + b, 0) / 7;
 
 
@@ -170,11 +171,13 @@ function check() {
   // 🔽 Historie speichern
   const history = loadHistory();
   history.push({
-    date: new Date().toLocaleDateString("de-DE"),
-    ampel: ampel,
-    text: text,
-    weekly: weeklyText
-  });
+  date: new Date().toLocaleDateString("de-DE"),
+  ampel: ampel,
+  text: text,
+  weekly: weeklyText,
+  avgWeek: avgWeek.toFixed(1)
+});
+
   saveHistory(history);
   renderHistory();
 
@@ -188,6 +191,7 @@ function check() {
 
 loadInputs();
 renderHistory();
+
 
 
 
