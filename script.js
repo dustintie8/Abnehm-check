@@ -1,9 +1,9 @@
 /* =========================
-   SPEICHERN / LADEN INPUTS
+   INPUTS SPEICHERN / LADEN
 ========================= */
 
 function saveInputs() {
-  let values = {};
+  const values = {};
   for (let i = 1; i <= 7; i++) {
     values["d" + i] = document.getElementById("d" + i).value;
   }
@@ -11,7 +11,7 @@ function saveInputs() {
 }
 
 function loadInputs() {
-  let saved = JSON.parse(localStorage.getItem("weightsInputs"));
+  const saved = JSON.parse(localStorage.getItem("weightsInputs"));
   if (!saved) return;
 
   for (let i = 1; i <= 7; i++) {
@@ -20,7 +20,7 @@ function loadInputs() {
 }
 
 /* =========================
-   AUTO-WEITER / KOMMA
+   AUTO-WEITER & KOMMA
 ========================= */
 
 function jumpNext(currentId) {
@@ -30,12 +30,10 @@ function jumpNext(currentId) {
 }
 
 function autoComma(el) {
-  // Punkt sofort zu Komma
   if (el.value.includes(".")) {
     el.value = el.value.replace(".", ",");
   }
 
-  // 75 -> 75,0
   if (/^\d{2,3}$/.test(el.value)) {
     el.value = el.value + ",0";
   }
@@ -44,11 +42,11 @@ function autoComma(el) {
 }
 
 /* =========================
-   RESET & NEUE WOCHE
+   RESET / NEUE WOCHE
 ========================= */
 
 function resetAll() {
-  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
+  if (!confirm("Alle Gewichte wirklich löschen?")) return;
 
   for (let i = 1; i <= 7; i++) {
     document.getElementById("d" + i).value = "";
@@ -68,7 +66,7 @@ function startNewWeek() {
 }
 
 /* =========================
-   WOCHEN-HISTORIE
+   HISTORIE
 ========================= */
 
 function loadHistory() {
@@ -93,15 +91,13 @@ function renderHistory() {
 
   history.slice().reverse().forEach((w, i) => {
     html += `
-      <div style="
-        background:#1b1b1b;
-        padding:10px;
-        border-radius:8px;
-        margin-bottom:8px;
-      ">
+      <div style="background:#1b1b1b; padding:10px; border-radius:8px; margin-bottom:8px;">
         <div style="font-weight:bold">${w.ampel} Woche ${history.length - i}</div>
         <div>${w.text}</div>
-        <div style="color:#aaa; font-size:14px">${w.weekly}</div>
+        <div style="color:#aaa; font-size:14px">
+          ${w.weekly}<br>
+          Ø Gewicht Woche: ${w.avgWeek} kg
+        </div>
         <div style="color:#666; font-size:12px">${w.date}</div>
       </div>
     `;
@@ -111,14 +107,11 @@ function renderHistory() {
 }
 
 /* =========================
-   CHECK (WOCHE ABSCHLIESSEN)
+   CHECK (HERZ DER APP)
 ========================= */
 
 function check() {
-  let weights = [];let avgWeek = weights.reduce((sum, w) => sum + w, 0) / weights.length;
-
-  let avgWeek = weights.reduce((a, b) => a + b, 0) / 7;
-
+  const weights = [];
 
   for (let i = 1; i <= 7; i++) {
     let v = document.getElementById("d" + i).value;
@@ -128,20 +121,24 @@ function check() {
     }
 
     v = parseFloat(v.replace(",", "."));
-    if (v < 30 || v > 300 || isNaN(v)) {
+    if (isNaN(v) || v < 30 || v > 300) {
       alert("Bitte realistisches Gewicht eingeben");
       return;
     }
 
-    weights.push(v);const avgWeek =
-  weights.reduce((sum, w) => sum + w, 0) / weights.length;
+    weights.push(v);
   }
 
-  let avgStart = (weights[0] + weights[1] + weights[2]) / 3;
-  let avgEnd   = (weights[4] + weights[5] + weights[6]) / 3;
+  // Ø der kompletten Woche (WICHTIG!)
+  const avgWeek =
+    weights.reduce((sum, w) => sum + w, 0) / weights.length;
 
-  let diff = avgEnd - avgStart;
-  let percentChange = (diff / avgStart) * 100;
+  // Trend-Berechnung
+  const avgStart = (weights[0] + weights[1] + weights[2]) / 3;
+  const avgEnd   = (weights[4] + weights[5] + weights[6]) / 3;
+
+  const diff = avgEnd - avgStart;
+  const percentChange = (diff / avgStart) * 100;
 
   let text = "";
   let ampel = "";
@@ -156,33 +153,32 @@ function check() {
     ampel = "🔴";
     text = "🔴 Kein Fettverlust. Kleine Anpassung nötig.";
   }
-let weeklyText =
-  (diff < 0
-    ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
-    : diff > 0
-    ? "In dieser Woche ca. +" + diff.toFixed(1) + " kg zugenommen."
-    : "Gewicht im Schnitt unverändert.")
-  + "\nØ Gewicht Woche: " + avgWeek.toFixed(1) + " kg";
 
- 
+  const weeklyText =
+    diff < 0
+      ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
+      : diff > 0
+      ? "In dieser Woche ca. +" + diff.toFixed(1) + " kg zugenommen."
+      : "Gewicht im Schnitt unverändert.";
 
   document.getElementById("result").innerText =
-    text + "\n\n" + weeklyText;
+    text + "\n\n" +
+    weeklyText + "\n" +
+    "Ø Gewicht Woche: " + avgWeek.toFixed(1) + " kg";
 
-  // 🔽 Historie speichern
+  // Historie speichern
   const history = loadHistory();
   history.push({
-  date: new Date().toLocaleDateString("de-DE"),
-  ampel: ampel,
-  text: text,
-  weekly: weeklyText,
-  avgWeek: avgWeek.toFixed(1)
-});
-
+    date: new Date().toLocaleDateString("de-DE"),
+    ampel: ampel,
+    text: text,
+    weekly: weeklyText,
+    avgWeek: avgWeek.toFixed(1)
+  });
   saveHistory(history);
   renderHistory();
 
-  // 🔽 Neue Woche starten
+  // Neue Woche starten
   startNewWeek();
 }
 
@@ -192,8 +188,3 @@ let weeklyText =
 
 loadInputs();
 renderHistory();
-
-
-
-
-
