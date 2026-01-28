@@ -116,6 +116,8 @@ function renderHistory() {
 
 function check() {
   let weights = [];
+  let avgWeek = weights.reduce((a, b) => a + b, 0) / 7;
+
 
   for (let i = 1; i <= 7; i++) {
     let v = document.getElementById("d" + i).value;
@@ -154,11 +156,13 @@ function check() {
   }
 
   let weeklyText =
-    diff < 0
-      ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
-      : diff > 0
-      ? "In dieser Woche ca. +" + diff.toFixed(1) + " kg zugenommen."
-      : "Gewicht im Schnitt unverändert.";
+  (diff < 0
+    ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
+    : diff > 0
+    ? "In dieser Woche ca. +" + diff.toFixed(1) + " kg zugenommen."
+    : "Gewicht im Schnitt unverändert.")
+  + "\nØ Gewicht Woche: " + avgWeek.toFixed(1) + " kg";
+
 
   document.getElementById("result").innerText =
     text + "\n\n" + weeklyText;
@@ -184,4 +188,5 @@ function check() {
 
 loadInputs();
 renderHistory();
+
 
