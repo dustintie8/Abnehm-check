@@ -133,7 +133,8 @@ function check() {
       return;
     }
 
-    weights.push(v);let avgWeek = weights.reduce((sum, w) => sum + w, 0) / weights.length;
+    weights.push(v);const avgWeek =
+  weights.reduce((sum, w) => sum + w, 0) / weights.length;
   }
 
   let avgStart = (weights[0] + weights[1] + weights[2]) / 3;
@@ -155,8 +156,7 @@ function check() {
     ampel = "🔴";
     text = "🔴 Kein Fettverlust. Kleine Anpassung nötig.";
   }
-
-  let weeklyText =
+let weeklyText =
   (diff < 0
     ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
     : diff > 0
@@ -164,6 +164,7 @@ function check() {
     : "Gewicht im Schnitt unverändert.")
   + "\nØ Gewicht Woche: " + avgWeek.toFixed(1) + " kg";
 
+ 
 
   document.getElementById("result").innerText =
     text + "\n\n" + weeklyText;
@@ -191,6 +192,7 @@ function check() {
 
 loadInputs();
 renderHistory();
+
 
 
 
