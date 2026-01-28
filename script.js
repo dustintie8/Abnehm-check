@@ -106,6 +106,14 @@ function autoComma(el) {
 
   saveInputs();
 }
+function startNewWeek() {
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("d" + i).value = "";
+  }
+  saveInputs();
+}
+
+
 
 
 
