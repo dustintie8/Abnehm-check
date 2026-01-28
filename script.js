@@ -28,7 +28,8 @@ function check() {
       return;
     }
 
-    v = parseFloat(v);
+    v = parseFloat(v.replace(",", "."));
+
 
     if (v < 30 || v > 300) {
       alert("Bitte realistisches Gewicht eingeben");
@@ -117,6 +118,7 @@ function startNewWeek() {
   }
   saveInputs();
 }
+
 
 
 
