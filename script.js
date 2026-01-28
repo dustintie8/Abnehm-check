@@ -11,10 +11,44 @@ function loadInputs() {
   if (!saved) return;
 
   for (let i = 1; i <= 7; i++) {
-    if (saved["d" + i] !== undefined) {
-      document.getElementById("d" + i).value = saved["d" + i];
-    }
+    document.getElementById("d" + i).value = saved["d" + i] || "";
   }
+}
+
+function jumpNext(currentId) {
+  const num = parseInt(currentId.replace("d", ""));
+  const next = document.getElementById("d" + (num + 1));
+  if (next) next.focus();
+}
+
+function autoComma(el) {
+  if (el.value.includes(".")) {
+    el.value = el.value.replace(".", ",");
+  }
+
+  if (/^\d{2,3}$/.test(el.value)) {
+    el.value = el.value + ",0";
+  }
+
+  saveInputs();
+}
+
+function resetAll() {
+  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
+
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("d" + i).value = "";
+  }
+
+  localStorage.removeItem("weightsInputs");
+  document.getElementById("result").innerText = "";
+}
+
+function startNewWeek() {
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("d" + i).value = "";
+  }
+  saveInputs();
 }
 
 function check() {
@@ -22,7 +56,6 @@ function check() {
 
   for (let i = 1; i <= 7; i++) {
     let v = document.getElementById("d" + i).value;
-
     if (!v) {
       alert("Bitte alle 7 Tage ausfüllen");
       return;
@@ -30,8 +63,7 @@ function check() {
 
     v = parseFloat(v.replace(",", "."));
 
-
-    if (v < 30 || v > 300) {
+    if (v < 30 || v > 300 || isNaN(v)) {
       alert("Bitte realistisches Gewicht eingeben");
       return;
     }
@@ -46,7 +78,6 @@ function check() {
   let percentChange = (diff / avgStart) * 100;
 
   let text = "";
-
   if (percentChange <= -0.25) {
     text = "🟢 Fettverlust läuft. Nichts ändern.";
   } else if (percentChange <= 0.1) {
@@ -55,74 +86,15 @@ function check() {
     text = "🔴 Kein Fettverlust. Kleine Anpassung nötig.";
   }
 
-  let weeklyChange = avgEnd - avgStart;
-let weeklyText = "";
+  let weeklyText =
+    diff < 0
+      ? "In dieser Woche ca. " + diff.toFixed(1) + " kg abgenommen."
+      : diff > 0
+      ? "In dieser Woche ca. +" + diff.toFixed(1) + " kg zugenommen."
+      : "Gewicht im Schnitt unverändert.";
 
-if (weeklyChange < 0) {
-  weeklyText = "In dieser Woche ca. " + weeklyChange.toFixed(1) + " kg abgenommen.";
-} else if (weeklyChange > 0) {
-  weeklyText = "In dieser Woche ca. +" + weeklyChange.toFixed(1) + " kg zugenommen.";
-} else {
-  weeklyText = "Gewicht im Schnitt unverändert.";
+  document.getElementById("result").innerText =
+    text + "\n\n" + weeklyText;
+
+  startNewWeek();
 }
-
-document.getElementById("result").innerText = text + "\n\n" + weeklyText;
-
-}
-
-
-function resetAll() {
-  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
-
-  for (let i = 1; i <= 7; i++) {
-    document.getElementById("d" + i).value = "";
-  }
-
-  localStorage.removeItem("weightsInputs");
-  document.getElementById("result").innerText = "";
-}
-
-
-{
-  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
-
-  for (let i = 1; i <= 7; i++) {
-    document.getElementById("d" + i).value = "";
-  }
-
-  localStorage.removeItem("weightsInputs");
-  document.getElementById("result").innerText = "";
-}
-function jumpNext(currentId) {
-  const num = parseInt(currentId.replace("d", ""));
-  const next = document.getElementById("d" + (num + 1));
-  if (next) next.focus();
-}
-function autoComma(el) {
-  // Punkt sofort in Komma umwandeln
-  if (el.value.includes(".")) {
-    el.value = el.value.replace(".", ",");
-  }
-
-  // Falls nur 2–3 Ziffern eingegeben wurden → ,0 anhängen
-  if (/^\d{2,3}$/.test(el.value)) {
-    el.value = el.value + ",0";
-  }
-
-  saveInputs();
-}
-function startNewWeek() {
-  for (let i = 1; i <= 7; i++) {
-    document.getElementById("d" + i).value = "";
-    document.getElementById("result").innerText = text + "\n\n" + weeklyText;
-  }
-  saveInputs();
-}
-
-
-
-
-
-
-
-
