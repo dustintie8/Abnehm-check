@@ -70,13 +70,17 @@ document.getElementById("result").innerText = text + "\n\n" + weeklyText;
 }
 
 
-function resetAll() 
-  function startNewWeek() {
+function resetAll() {
+  if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
+
   for (let i = 1; i <= 7; i++) {
     document.getElementById("d" + i).value = "";
   }
-  saveInputs();
+
+  localStorage.removeItem("weightsInputs");
+  document.getElementById("result").innerText = "";
 }
+
 
 {
   if (!confirm("Alle eingetragenen Gewichte wirklich löschen?")) return;
@@ -109,9 +113,11 @@ function autoComma(el) {
 function startNewWeek() {
   for (let i = 1; i <= 7; i++) {
     document.getElementById("d" + i).value = "";
+    document.getElementById("result").innerText = text + "\n\n" + weeklyText;
   }
   saveInputs();
 }
+
 
 
 
