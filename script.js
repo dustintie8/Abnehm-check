@@ -132,7 +132,7 @@ function check() {
       return;
     }
 
-    weights.push(v);
+    weights.push(v);let avgWeek = weights.reduce((sum, w) => sum + w, 0) / weights.length;
   }
 
   let avgStart = (weights[0] + weights[1] + weights[2]) / 3;
@@ -188,5 +188,6 @@ function check() {
 
 loadInputs();
 renderHistory();
+
 
 
